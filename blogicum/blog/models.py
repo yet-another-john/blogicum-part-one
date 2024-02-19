@@ -3,6 +3,8 @@ from django.contrib.auth import get_user_model
 
 
 User = get_user_model()
+NAME_LENGTH = 256
+TITLE_LENGTH = 256
 
 
 class AbstractModel(models.Model):
@@ -18,7 +20,7 @@ class AbstractModel(models.Model):
 
 
 class Location(AbstractModel):
-    name = models.CharField('Название места', max_length=256)
+    name = models.CharField('Название места', max_length=NAME_LENGTH)
 
     class Meta:
         verbose_name = 'местоположение'
@@ -29,7 +31,7 @@ class Location(AbstractModel):
 
 
 class Category(AbstractModel):
-    title = models.CharField('Заголовок', max_length=256)
+    title = models.CharField('Заголовок', max_length=TITLE_LENGTH)
     description = models.TextField('Описание')
     slug = models.SlugField(
         'Идентификатор',
@@ -47,7 +49,7 @@ class Category(AbstractModel):
 
 
 class Post(AbstractModel):
-    title = models.CharField('Заголовок', max_length=256)
+    title = models.CharField('Заголовок', max_length=TITLE_LENGTH)
     text = models.TextField('Текст')
     pub_date = models.DateTimeField(
         'Дата и время публикации',
@@ -64,6 +66,7 @@ class Post(AbstractModel):
         on_delete=models.SET_NULL,
         verbose_name='Местоположение',
         null=True,
+        blank=True
     )
     category = models.ForeignKey(
         Category,

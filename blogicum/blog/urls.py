@@ -9,7 +9,7 @@ urlpatterns = [
          views.index,
          name='index'),
 
-    path('posts/<int:id>/',
+    path('posts/<int:post_id>/',
          views.post_detail,
          name='post_detail'),
 
